@@ -28,7 +28,7 @@ app.use(express.json());
 
 // Use your routes
 app.use("/api/v1", userRoute);
-app.use("/api/v1/books", bookRoute);
+app.use("/api/v1", bookRoute);
 app.use("/api/v1", favouriteRoute);
 app.use("/api/v1", cartRoute);
 app.use("/api/v1", orderRoute);
