@@ -26,13 +26,13 @@ mongoose.connect(URI)
 
 app.use(express.json());
 
-// Use your routes
+
 app.use("/api/v1", userRoute);
 app.use("/api/v1", bookRoute);
 app.use("/api/v1", favouriteRoute);
 app.use("/api/v1", cartRoute);
 app.use("/api/v1", orderRoute);
-app.use("/api/v1", paymentRoute); // Ensure this is correctly used
+app.use("/api/v1", paymentRoute); 
 
 // Static files setup
 const __dirname = path.dirname(fileURLToPath(import.meta.url));

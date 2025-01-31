@@ -3,18 +3,25 @@ import mongoose from "mongoose";
 const orderSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',     
+        ref: 'user',
     },
     book: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'books', 
+        ref: 'books',
+
     },
+    quantity: {
+        type: Number,
+        default: 1,
+        required: true
+    },
+
     status: {
         type: String,
-        enum: ['Order Placed','Out For Delivery', 'Delivered','Cancelled'],
+        enum: ['Order Placed', 'Out For Delivery', 'Delivered', 'Cancelled'],
         default: 'Order Placed'
     },
 
- }, { timestamps: true });
+}, { timestamps: true });
 
 export default mongoose.model('order', orderSchema);
