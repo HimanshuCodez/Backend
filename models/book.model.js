@@ -29,10 +29,12 @@ const bookSchema = new mongoose.Schema({
       required: true,
       default: 10
    },
+   quantity: {
+      type: Number,
+      default: 1,
+      required: true
+   },
    isbn: { type: String, unique: true },
-   discount:{
-      type: Boolean,
-   }
 
 }, { timestamps: true })
 //model
