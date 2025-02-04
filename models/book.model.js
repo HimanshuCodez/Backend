@@ -30,6 +30,9 @@ const bookSchema = new mongoose.Schema({
       default: 10
    },
    isbn: { type: String, unique: true },
+   discount:{
+      type: Boolean,
+   }
 
 }, { timestamps: true })
 //model
