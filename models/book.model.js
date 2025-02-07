@@ -20,6 +20,19 @@ const bookSchema = new mongoose.Schema({
       type: Number,
       required: true,
    },
+   discountedPrice:{
+      type: Number,
+      default: 0,
+   },
+   discountPercent:{
+      type:Number,
+      default: 0,
+   },
+   category:{
+      type : String,
+      required:true,
+   },
+
    language: {
       type: String,
       required: true,
@@ -28,6 +41,11 @@ const bookSchema = new mongoose.Schema({
       type: Number,
       required: true,
       default: 10
+   },
+   quantity: {
+      type: Number,
+      default: 1,
+      required: true
    },
    isbn: { type: String, unique: true },
 

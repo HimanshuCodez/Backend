@@ -10,12 +10,6 @@ const orderSchema = new mongoose.Schema({
         ref: 'books',
 
     },
-    quantity: {
-        type: Number,
-        default: 1,
-        required: true
-    },
-
     status: {
         type: String,
         enum: ['Order Placed', 'Out For Delivery', 'Delivered', 'Cancelled'],
