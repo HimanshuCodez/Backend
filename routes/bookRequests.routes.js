@@ -36,15 +36,6 @@ router.post("/request-book", authenticateToken, async (req, res) => {
 });
 
 
-// Admin Routes
-
-// Fetch all user requests (Admin)
-// Admin Routes
-
-// Admin Routes
-
-// Fetch all user requests (Admin)
-// Fetch user-specific book requests
 router.get("/user/requests", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id; // Get user ID from the token

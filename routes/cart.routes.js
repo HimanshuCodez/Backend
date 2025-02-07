@@ -27,8 +27,6 @@ router.put('/add-to-cart', authenticateToken, async (req, res) => {
         // Update book quantity in Books model
         book.quantity = newQuantity;
         await book.save();
-
-        
         const isBookInCart = userData.cart.includes(bookid);
         if (isBookInCart) {
             return res.status(400).json({ message: "Book already in cart" });
