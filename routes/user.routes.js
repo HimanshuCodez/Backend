@@ -16,11 +16,7 @@ router.post("/sign-up", async (req, res) => {
             return res.status(400).json({ message: "Please fill all the fields" });
         }
 
-        // Check if username already exists
-        const existingUsername = await User.findOne({ username });
-        if (existingUsername) {
-            return res.status(400).json({ error: "Username already exists" });
-        }
+       
 
         // Check if email already exists
         const existingUserEmail = await User.findOne({ email });

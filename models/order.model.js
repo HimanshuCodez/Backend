@@ -5,11 +5,10 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
     },
-    book: {
+    book: [{  // ✅ Change from `book` to `books`
         type: mongoose.Schema.Types.ObjectId,
         ref: 'books',
-
-    },
+    }],
     status: {
         type: String,
         enum: ['Order Placed', 'Out For Delivery', 'Delivered', 'Cancelled'],
