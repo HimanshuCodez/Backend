@@ -5,7 +5,7 @@ const orderSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
     },
-    book: [{  // ✅ Change from `book` to `books`
+    book: [{  
         type: mongoose.Schema.Types.ObjectId,
         ref: 'books',
     }],

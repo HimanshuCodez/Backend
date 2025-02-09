@@ -14,15 +14,19 @@ router.post("/add-book", authenticateToken,async(req,res)=>{
             return res.status(403).json({ message: "You are not an admin" });
         }
         //book
-        const { url,title, author, price,description,language } = req.body;
+        const { url,name, author, price,description, stock,language,category,discountedPrice,discountPercent,isbn } = req.body;
         const newBook = new Book({
             url: url,
-            title: title,
+            name: name,
             author: author,
             price: price,
+            stock : stock,
             description: description,
-            language: language
-           
+            language: language,
+            category :category,
+            discountPercent : discountPercent,
+            discountedPrice: discountedPrice,
+            isbn  : isbn,
         });
         await newBook.save();
         res.status(200).json({ message: "Book added successfully" });
@@ -36,18 +40,20 @@ router.put("/update-book", authenticateToken,async(req,res)=>{
         //to check user is admin or not
         const {bookid} = req.headers;
         
-        if(user.role !== "admin"){
-            return res.status(403).json({ message: "You are not an admin" });
-        }
-        book
-        const { url,title, author, price,description,language } = req.body;
+       
+        const { url,name, author, price,description, stock,language,category,discountedPrice,discountPercent,isbn} = req.body;
         await Book.findByIdAndUpdate(bookid,{
             url: url,
-            title: title,
+            name: name,
             author: author,
             price: price,
+            stock : stock,
             description: description,
-            language: language
+            language: language,
+            category :category,
+            discountPercent : discountPercent,
+            discountedPrice: discountedPrice,
+            isbn  : isbn,
            
         });
         
@@ -62,18 +68,21 @@ router.delete("/delete-book", authenticateToken,async(req,res)=>{
         //to check user is admin or not
         const {bookid} = req.headers;
         
-        if(user.role !== "admin"){
-            return res.status(403).json({ message: "You are not an admin" });
-        }
-        book
-        const { url,title, author, price,description,language } = req.body;
+        
+       
+        const { url,name, author, price,description, stock,language,category,discountedPrice,discountPercent,isbn } = req.body;
         await Book.findByIdAndDelete(bookid,{
             url: url,
-            title: title,
+            name: name,
             author: author,
             price: price,
+            stock : stock,
             description: description,
-            language: language
+            language: language,
+            category :category,
+            discountPercent : discountPercent,
+            discountedPrice: discountedPrice,
+            isbn  : isbn,
            
         });
         
