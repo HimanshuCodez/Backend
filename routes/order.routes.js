@@ -103,20 +103,32 @@ router.get("/get-all-orders", authenticateToken, async (req, res) => {
         return res.status(500).json(error);
     }
 })
-router.get("/update-status/:id", authenticateToken, async (req, res) => {
+router.put("/update-status/:id", authenticateToken, async (req, res) => {
     try {
-        const {id} = req.params;
-         await Order.findByIdAndUpdate(id,{status:req.body.status})
+        const { id } = req.params;
+        const { status } = req.body; // Extract status from request body
+
+        if (!status) {
+            return res.status(400).json({ message: "Status is required" });
+        }
+
+        const updatedOrder = await Order.findByIdAndUpdate(id, { status }, { new: true });
+
+        if (!updatedOrder) {
+            return res.status(404).json({ message: "Order not found" });
+        }
+
         return res.status(200).json({
-            status: "success",          
-            message: " update status successfully"
-        })
+            status: "success",
+            message: "Order status updated successfully",
+            data: updatedOrder
+        });
 
     } catch (error) {
-      console.log('Error getting update orders', error);
-        return res.status(500).json(error);
+        console.error("Error updating order status:", error);
+        return res.status(500).json({ message: "Internal server error" });
     }
-})
+});
 
 
 
