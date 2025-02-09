@@ -43,12 +43,12 @@ router.post('/place-order', authenticateToken, async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
-
+        
        // ✅ Send invoices for each order
 for (const orderId of orderIds) {
     try {
         const invoiceResponse = await axios.post(
-            "https://backend-h759.onrender.com/api/v1/send-invoice",
+            "http://localhost:4000/api/v1/send-invoice",
             { order_id: orderId },
             { headers: { authorization: req.headers.authorization } }
         );

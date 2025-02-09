@@ -102,18 +102,28 @@ router.get("/get-user-info",authenticateToken, async (req, res) => {
 });
 
 
-router.put("/update-address",authenticateToken,async(req,res)=>{
-
-try {
-     const {id} = req.headers;
-     const {address} = req.body;
-      await User.findByIdAndUpdate(id, {address:address});
-     return res.status(200).json( {message:"address updated successfully"});
- 
-} catch (error) {
-     res.status(500).json({ message: "Internal server error" });
-}
-})
+router.put("/update-address", authenticateToken, async (req, res) => {
+    try {
+      const { id } = req.headers;
+      const { address } = req.body;
+  
+      if (!address) {
+        return res.status(400).json({ message: "Address is required" });
+      }
+  
+      const updatedUser = await User.findByIdAndUpdate(id, { address }, { new: true });
+  
+      if (!updatedUser) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      return res.status(200).json({ message: "Address updated successfully", updatedUser });
+    } catch (error) {
+      console.error("Error updating address:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  });
+  
 export default router;
 
 
