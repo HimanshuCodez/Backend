@@ -1,14 +1,21 @@
+// Define Book Request Schema
 import mongoose from "mongoose";
-
 const bookRequestSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',  
         required: true
     },
-    book: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'books',  
+    bookTitle: {
+        type: String,  
+        required: true
+    },
+    author: {
+        type: String,
+        required: true
+    },
+    isbn: {
+        type: String,
         required: true
     },
     requestDate: {
@@ -26,4 +33,5 @@ const bookRequestSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
-export default mongoose.model("bookRequest", bookRequestSchema);
+// Create Model
+export default mongoose.model("BookRequest", bookRequestSchema);

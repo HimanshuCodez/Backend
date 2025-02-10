@@ -18,8 +18,6 @@ router.get("/sales-report", authenticateToken, async (req, res) => {
             createdAt: { $gte: new Date(startDate), $lte: new Date(endDate) },
         }).populate("book user"); 
 
-        console.log("Total Delivered Orders in DB:", totalDeliveredOrders);
-        console.log("Fetched Orders:", orders.length);
 
         let totalOrders = totalInDB; 
         let totalRevenue = 0;
