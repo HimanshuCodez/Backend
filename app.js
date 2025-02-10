@@ -12,6 +12,7 @@ import path from "path";
 import testMail from './routes/testMail.routes.js'
 import { fileURLToPath } from "url";
  // Import PDFKit for invoice generation
+ import salesReportRoutes from "./routes/salesReport.routes.js";
 
 dotenv.config();
 
@@ -35,6 +36,7 @@ app.use("/api/v1", cartRoute);
 app.use("/api/v1", orderRoute);
 app.use("/api/v1", paymentRoute); 
 app.use("/api/v1", testMail); 
+app.use("/api/v1", salesReportRoutes);
 
 // Static files setup
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
