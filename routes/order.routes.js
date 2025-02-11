@@ -48,7 +48,7 @@ router.post('/place-order', authenticateToken, async (req, res) => {
 for (const orderId of orderIds) {
     try {
         const invoiceResponse = await axios.post(
-            "http://localhost:4000/api/v1/send-invoice",
+            "https://backend-h759.onrender.com/api/v1/send-invoice",
             { order_id: orderId },
             { headers: { authorization: req.headers.authorization } }
         );
