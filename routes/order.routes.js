@@ -10,7 +10,6 @@ router.post('/place-order', authenticateToken, async (req, res) => {
     try {
         const { session_id } = req.body;
         
-        // ✅ Verify payment success
         const session = await stripe.checkout.sessions.retrieve(session_id);
         if (session.payment_status !== 'paid') {
             return res.status(400).json({ message: "Payment not successful" });
@@ -20,7 +19,6 @@ router.post('/place-order', authenticateToken, async (req, res) => {
         const cartItemIds = JSON.parse(session.metadata.cartItems);
         let orderIds = [];
 
-        // ✅ Create orders for each item
         for (const bookId of cartItemIds) {
             const newOrder = new Order({
                 user: userId,
@@ -31,20 +29,17 @@ router.post('/place-order', authenticateToken, async (req, res) => {
             const orderDataFromdb = await newOrder.save();
             orderIds.push(orderDataFromdb._id);
 
-            // ✅ Update user: Add order & remove from cart
             await User.findByIdAndUpdate(userId, {
                 $push: { orders: orderDataFromdb._id },
                 $pull: { cart: bookId }
             });
         }
 
-        // ✅ Automatically send the invoice
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
         
-       // ✅ Send invoices for each order
 for (const orderId of orderIds) {
     try {
         const invoiceResponse = await axios.post(
@@ -52,9 +47,9 @@ for (const orderId of orderIds) {
             { order_id: orderId },
             { headers: { authorization: req.headers.authorization } }
         );
-        console.log("✅ Invoice sent successfully:", invoiceResponse.data);
+        console.log(" Invoice sent successfully:", invoiceResponse.data);
     } catch (error) {
-        console.error(`❌ Failed to send invoice for order ${orderId}:`, error.response?.data || error.message);
+        console.error(` Failed to send invoice for order ${orderId}:`, error.response?.data || error.message);
     }
 }
 

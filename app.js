@@ -9,7 +9,7 @@ import cartRoute from './routes/cart.routes.js';
 import orderRoute from './routes/order.routes.js';
 import paymentRoute from './routes/payment.routes.js'; // Correctly import the route
 import path from "path";
-import testMail from './routes/testMail.routes.js'
+// import testMail from './routes/testMail.routes.js'
 import BookRequest from './routes/bookRequests.routes.js'
 import { fileURLToPath } from "url";
  // Import PDFKit for invoice generation
@@ -36,7 +36,7 @@ app.use("/api/v1", favouriteRoute);
 app.use("/api/v1", cartRoute);
 app.use("/api/v1", orderRoute);
 app.use("/api/v1", paymentRoute); 
-app.use("/api/v1", testMail); 
+// app.use("/api/v1", testMail); 
 app.use("/api/v1", salesReportRoutes);
 app.use("/api/v1", BookRequest);
 
